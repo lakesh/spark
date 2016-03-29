@@ -55,6 +55,11 @@ class BisectingKMeansModel private[clustering] (
     root.predict(point)
   }
 
+  @Since("1.6.0")
+  def predictPath(points: RDD[Vector]): RDD[Array[ClusteringTreeNode]] = {
+    points.map { p => root.predictPath(p) }
+  }
+
   /**
    * Predicts the indices of the clusters that the input points belong to.
    */
